@@ -8,7 +8,7 @@ const props = defineProps({
 
 <template>
     <div class="flex flex-row align-items-center">
-        <img :src="props.img" alt="bot">
+        <img class="mr-2" :src="props.img" alt="bot">
         <p>{{ props.text }}</p>
     </div>
 </template>
