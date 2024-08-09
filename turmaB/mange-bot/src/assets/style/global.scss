@@ -17,5 +17,19 @@
     background-color: var(--app-background);
 }
 
+.app-dark-button{
+    border: none;
+    border-radius: 1rem;
+    color:white;
+    font-weight: bold;
+    background-color: var(--app-footer-background);
+    cursor: pointer;
+    &:hover{
+        background-color: var(--app-dark-button-hover);
+        transform: scale(1.05);
+        transition: 1.5s;
+    }
+}
+
 
 
