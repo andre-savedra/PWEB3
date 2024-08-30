@@ -12,5 +12,9 @@
         "HOME": "Home",
         "BUILD": "Build",
         "CART": "Cart"
+    },
+    "BUILD":{
+        "TITLE": "Customize your Robot!",
+        "ADD_CART": "Add in Cart"
     }
 }

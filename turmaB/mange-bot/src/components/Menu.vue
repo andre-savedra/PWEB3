@@ -14,7 +14,7 @@ const change = ()=> {
     }
     currentLanguage.value = i18nApplication.global.locale.value;
 }
-const flag = computed(()=> currentLanguage.value == 'br'?  'br.png' : 'en.png');
+const flag = computed(()=> currentLanguage.value == 'br'?  'en.png' : 'br.png');
 
 </script>
 
@@ -33,7 +33,7 @@ const flag = computed(()=> currentLanguage.value == 'br'?  'br.png' : 'en.png');
 <style scoped lang="scss">
     header{
         height: 5rem;
-        width: 40rem;
+        width: 45rem;
         img{
             margin-left: 4rem;
             height: 4rem;
