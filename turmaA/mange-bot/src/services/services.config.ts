@@ -3,13 +3,13 @@ export const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const getAxios = ()=> {
     const createdAxios = axios.create({
-        baseURL: "/proxy-api/api",
+        baseURL: "/proxy-api/api", //`${BASE_URL}/api`,
         timeout: 40000, //40 segundos
         headers: {
             "Content-Type": "application/json",
             credentials: "include",
             Authorization: `Bearer meuToken...`
-        }
+        },
     });
 
     //createdAxios.interceptors.request.use()
