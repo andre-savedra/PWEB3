@@ -14,7 +14,7 @@ const change = ()=> {
     }
     currentLanguage.value = i18nApplication.global.locale.value;
 }
-const flag = computed(()=> currentLanguage.value == 'br'?  'en.png' : 'br.png');
+const flag = computed(()=> currentLanguage.value == 'br'?  'br.png' : 'en.png');
 
 </script>
 
