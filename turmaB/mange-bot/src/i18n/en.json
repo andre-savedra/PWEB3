@@ -11,7 +11,8 @@
     "MENU":{
         "HOME": "Home",
         "BUILD": "Build",
-        "CART": "Cart"
+        "CART": "Cart",
+        "ABOUT": "About"
     },
     "BUILD":{
         "TITLE": "Customize your Robot!",

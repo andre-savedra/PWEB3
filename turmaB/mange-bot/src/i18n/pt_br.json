@@ -11,7 +11,8 @@
     "MENU":{
         "HOME": "Início",
         "BUILD": "Construir",
-        "CART": "Carrinho"
+        "CART": "Carrinho",
+        "ABOUT": "Sobre"
     },
     "BUILD":{
         "TITLE": "Personalize seu Robô!",

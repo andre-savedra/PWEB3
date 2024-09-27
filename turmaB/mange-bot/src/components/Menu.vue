@@ -25,6 +25,7 @@ const flag = computed(()=> currentLanguage.value == 'br'?  'br.png' : 'en.png');
           <RouterLink class="m-4" to="/">{{ $t('MENU.HOME') }}</RouterLink>
           <RouterLink class="m-4" to="/cart">{{ $t('MENU.CART') }}</RouterLink>
           <RouterLink class="m-4" to="/build">{{ $t('MENU.BUILD') }}</RouterLink>
+          <RouterLink class="m-4" to="/about">{{ $t('MENU.ABOUT') }}</RouterLink>
           <img id="flag" :src="flag" alt="flag" @click="change">
         </nav>
     </header>
@@ -33,7 +34,7 @@ const flag = computed(()=> currentLanguage.value == 'br'?  'br.png' : 'en.png');
 <style scoped lang="scss">
     header{
         height: 5rem;
-        width: 45rem;
+        width: 55rem;
         img{
             margin-left: 4rem;
             height: 4rem;
