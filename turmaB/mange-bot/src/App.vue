@@ -7,7 +7,7 @@ import Menu from './components/Menu.vue';
 <template>   
   <main id="card-app">
     <div id="content-app">
-      <Menu />
+      <Menu />      
       <RouterView /> 
     </div>
     <footer class="flex flex-row align-items-end justify-content-end">

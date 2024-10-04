@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <main>
+  <main id="cart-page">
     <h1>Cart Page!</h1>
 
     <table>

@@ -25,7 +25,7 @@
 </script>
 
 <template>
-  <main>
+  <main id="build-page">
     <h1 class="text-center mb-2">{{ $t('BUILD.TITLE') }} 🤖</h1>    
     <section class="top-row flex justify-content-around">
       <PartSelector :parts="availableParts.heads" 

@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main>
+  <main id="not-found-page">
     <h1>Página não Encontrada 😥</h1>
     <img src="/notFoundBot.jpg">
   </main>
