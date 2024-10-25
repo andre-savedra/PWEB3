@@ -21,11 +21,11 @@
       <tbody>
         <tr v-for="(robot,index) in useCart().robots" :key="index">
             <td>{{ index }}</td>
-            <td>{{ robot.head.id }} - {{ robot.head.title }}</td>
-            <td>{{ robot.torso.id }} - {{ robot.torso.title }}</td>
-            <td>{{ robot.base.id }} - {{ robot.base.title }}</td>
-            <td>{{ robot.leftArm.id }} - {{ robot.leftArm.title }}</td>
-            <td>{{ robot.rightArm.id }} - {{ robot.rightArm.title }}</td>
+            <td :class="`head-${robot.head.id}`" >{{ robot.head.id }} - {{ robot.head.title }}</td>
+            <td :class="`torso-${robot.torso.id}`">{{ robot.torso.id }} - {{ robot.torso.title }}</td>
+            <td :class="`base-${robot.base.id}`">{{ robot.base.id }} - {{ robot.base.title }}</td>
+            <td :class="`left-${robot.leftArm.id}`">{{ robot.leftArm.id }} - {{ robot.leftArm.title }}</td>
+            <td :class="`right-${robot.rightArm.id}`">{{ robot.rightArm.id }} - {{ robot.rightArm.title }}</td>
             <td>R${{ robot.cost }}</td>
             <td><button @click="useCart().removeCart(index)">
               Excluir

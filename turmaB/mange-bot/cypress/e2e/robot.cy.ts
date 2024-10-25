@@ -14,8 +14,48 @@ const el = {
     previous: () => cy.get(".prev-selector"),
   },
   getHeadImage: ()=> cy.get("#top-image"),
-  nextHeadButton: ()=> cy.get(".top-row .next-selector")
+  nextHeadButton: ()=> cy.get(".top-row .next-selector"),
+  cartContainer: ()=> cy.get("#cart-page"),
+  addCartButton: ()=> cy.get("#add-cart"),
+  images: {
+    head: ()=> cy.get("#top-image"),
+    base: ()=> cy.get("#bottom-image"),
+    leftArm: ()=> cy.get("#left-image"),
+    rightArm: ()=> cy.get("#right-image"),
+    torso: ()=> cy.get("#center-image"),
+  }
 };
+
+
+
+const getPartIds = () => {
+  let robot = {
+    leftArmId: "",
+    rightArmId: "",
+    baseId: "",
+    torsoId: "",
+    headId: "",
+  }
+
+  el.images.head().invoke('attr', 'image-id').then(id=>{
+    robot.headId = id ?? "";
+  })
+  el.images.base().invoke('attr', 'image-id').then(id=>{
+    robot.baseId = id ?? "";
+  })
+  el.images.torso().invoke('attr', 'image-id').then(id=>{
+    robot.torsoId = id ?? "";
+  })
+  el.images.leftArm().invoke('attr', 'image-id').then(id=>{
+    robot.leftArmId = id ?? "";
+  })
+  el.images.rightArm().invoke('attr', 'image-id').then(id=>{
+    robot.rightArmId = id ?? "";
+  })
+  
+  return robot;
+}
+
 
 describe("testing home page", () => {
   beforeEach(() => {
@@ -54,10 +94,12 @@ describe("testing build page", () => {
       img.should("exist");
 
       img.should("have.attr", "src");
+      
       const sourceImage = $img.attr("src");
-      if (!sourceImage) {
-        throw new Error("Source is empty");
-      }
+      expect(sourceImage).to.be.not.null
+      // if (!sourceImage) {
+      //   throw new Error("Source is empty");
+      // }
 
       // img.should('not.be.empty')
     });
@@ -65,35 +107,85 @@ describe("testing build page", () => {
 
   it("checking part changing", () => {
     cy.wait(2000)
+    let imageBeforeId: Array<string> = [];
     
+    //coletado todos os part selectors:
+    //coletado todos os ids antes de avançar a peça
     el.partSelectorArray().each($part=>{
+      //coleta a imagem e o botão next
       const getImage = ()=> cy.wrap($part.children(".part-images"))
       const next = ()=> cy.wrap($part.children(".next-selector"))
 
-      let imageBeforeId = '';
-      getImage().invoke('attr', 'image-id').then(id=>{
-        console.log('BEFORE:', id);  
-        if(id) imageBeforeId = id;
+      getImage().invoke('attr', 'image-id').then(id=>{          
+        if(id) imageBeforeId.push(id);
+      });
+      next().click();          
+    });   
+    //coletado os ids depois da mudança
+    //verificado se estão diferentes!
+    //clique no botão de voltar
+    el.partSelectorArray().each(($part,index)=>{
+      const getImage = ()=> cy.wrap($part.children(".part-images"));
+      const previous = ()=> cy.wrap($part.children(".prev-selector"))
+
+      getImage().invoke('attr', 'image-id').then(id=>{          
+        expect(id !== undefined).to.be.true //opcional
+        if(id) {
+          expect(id).to.be.not.equal(imageBeforeId[index]);
+        }
       });
 
-      getImage().should('have.attr', 'image-id', imageBeforeId);
+      previous().click();      
+    });
 
-      cy.wait(2000);
-      next().click();
+    //verifica se voltou aos ids originais
+    el.partSelectorArray().each(($part,index)=>{
+      const getImage = ()=> cy.wrap($part.children(".part-images"));
 
-      let imageAfterId = ''; 
-      getImage().invoke('attr', 'image-id').then(id=>{
-        console.log('AFTER:', id);  
-        if(id) imageAfterId = id;
+      getImage().invoke('attr', 'image-id').then(id=>{          
+        expect(id !== undefined).to.be.true //opcional
+        if(id) {
+          expect(id).to.be.equal(imageBeforeId[index]);
+        }
       });
-
-      getImage().should('have.attr', 'image-id', imageAfterId)
-
-      if(imageBeforeId == imageAfterId){
-        //throw new Error('Part was not changed')
-      }      
-    });  
-    
-   
+    });    
   });
+});
+
+
+describe("testing cart page", () => {
+  beforeEach(() => {
+    cy.visit("/cart");
+  });
+
+  it("accessing cart page", () => {
+    el.cartContainer().should("exist");
+  });
+
+  
+  it("testing adding new robot in cart", () => {
+    cy.visit("/build");
+   
+    //clica aleatóriamente em cada part selector
+    el.partSelectorArray().each($part=>{
+      const next = ()=> cy.wrap($part.children(".next-selector"))
+      const times = Math.round(Math.random() * 10);
+      console.log("times: ", times)
+      
+      for(let i=0; i<times; i++){
+        next().click()
+      }
+    });
+
+    let robot = getPartIds();
+    cy.wait(1000);
+
+    el.addCartButton().click();
+    cy.visit("/cart");
+
+    console.log("robot",robot)
+
+  });
+
+
 });
