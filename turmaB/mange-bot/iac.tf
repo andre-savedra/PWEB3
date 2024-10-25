@@ -14,32 +14,32 @@ provider "azurerm" {
   }
 }
 
-resource "azurerm_resource_group" "andre-savedra-robot-tB-group" {
-  name = "andre-savedra-robot-tB-group"
+resource "azurerm_resource_group" "andre-savedra-robot-tB2-group" {
+  name = "andre-savedra-robot-tB2-group"
   location = "eastus2"
 }
 
-resource "azurerm_service_plan" "andre-savedra-robot-tB-sp" {
-    name = "andre-savedra-robot-tB-sp"
-    resource_group_name = azurerm_resource_group.andre-savedra-robot-tB-group.name
-    location = azurerm_resource_group.andre-savedra-robot-tB-group.location
+resource "azurerm_service_plan" "andre-savedra-robot-tB2-sp" {
+    name = "andre-savedra-robot-tB2-sp"
+    resource_group_name = azurerm_resource_group.andre-savedra-robot-tB2-group.name
+    location = azurerm_resource_group.andre-savedra-robot-tB2-group.location
     sku_name = "S1"
     os_type = "Windows"
 }
 
-resource "azurerm_windows_web_app" "andre-savedra-robot-tB-app" {
-  name = "andre-savedra-robot-tB-app"
-  resource_group_name = azurerm_resource_group.andre-savedra-robot-tB-group.name
-  location = azurerm_resource_group.andre-savedra-robot-tB-group.location
-  service_plan_id = azurerm_service_plan.andre-savedra-robot-tB-sp.id
+resource "azurerm_windows_web_app" "andre-savedra-robot-tB2-app" {
+  name = "andre-savedra-robot-tB2-app"
+  resource_group_name = azurerm_resource_group.andre-savedra-robot-tB2-group.name
+  location = azurerm_resource_group.andre-savedra-robot-tB2-group.location
+  service_plan_id = azurerm_service_plan.andre-savedra-robot-tB2-sp.id
   site_config {
     always_on = false
   }
 }
 
-resource "azurerm_windows_web_app_slot" "andre-savedra-robot-tB-app-QA" {
-  name = "andre-savedra-robot-tB-app-QA"
-  app_service_id = azurerm_windows_web_app.andre-savedra-robot-tB-app.id
+resource "azurerm_windows_web_app_slot" "andre-savedra-robot-tB2-app-QA" {
+  name = "andre-savedra-robot-tB2-app-QA"
+  app_service_id = azurerm_windows_web_app.andre-savedra-robot-tB2-app.id
   site_config {
     
   }
